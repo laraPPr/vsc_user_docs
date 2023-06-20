@@ -28,6 +28,13 @@ OS_PICK_SUBDIR = 'choose_os'
 
 args = None
 
+parser = argparse.ArgumentParser(description="Get args.")
+parser.add_argument("--verbose", "-v", action="store_true", dest="verbose", help="Enable verbose logging.")
+parser.add_argument("--nostrict", "-n", action="store_true", dest="notstrict", help="Disable strict mkdocs build.")
+parser.add_argument("--nocleanup", "-b", action="store_true", dest="nocleanup", help="Keep build on failure.")
+
+args = parser.parse_args()
+
 class BuildException(Exception):
     """General build exception."""
 
@@ -129,7 +136,6 @@ def build_pool(ops):
         if subdir is not None:
             dirs.append(subdir)
         cmds.append(f"mkdocs {verb} build {strict} {verb} --config-file {fn} --site-dir {os.path.join(*dirs)}")
-
     # Actual build
     try:
         procs = len(os.sched_getaffinity(0))
@@ -193,12 +199,6 @@ def os_pick_post(ops):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Get args.")
-    parser.add_argument("--verbose", "-v", action="store_true", dest="verbose", help="Enable verbose logging.")
-    parser.add_argument("--nostrict", "-n", action="store_true", dest="notstrict", help="Disable strict mkdocs build.")
-    parser.add_argument("--nocleanup", "-b", action="store_true", dest="nocleanup", help="Keep build on failure.")
-
-    args = parser.parse_args()
 
     pre, docs, post = make_mkdocs_yml()
 

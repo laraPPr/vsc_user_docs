@@ -1,5 +1,6 @@
 site_name: Linux tutorial
-docs_dir: docs/linux-tutorial
+#docs_dir: docs/linux-tutorial
+docs_dir: docs/HPC/only/gent/linux-tutorial
 nav:
   - Getting Started: getting_started.md
   - Navigating: navigating.md
