@@ -105,7 +105,9 @@ CFGS1=/apps/gent/CO7/sandybridge/software/EasyBuild/3.6.2/lib/python2.7/site-pac
 For readily available easyconfigs, just specify the name of the
 easyconfig file to build and install the corresponding software package:
 
-<pre><code>$ <b>eb example-1.2.1-foss-{{ current_year}}a.eb --robot</b>
+<pre><code>
+    $ <b>qsub -I</b> <!--look at ... to add info on nodes/ppn/walltime-->
+    $ <b>eb example-1.2.1-foss-{{ current_year}}a.eb --robot</b>
 </code></pre>
 
 ### Installing variants on supported software
